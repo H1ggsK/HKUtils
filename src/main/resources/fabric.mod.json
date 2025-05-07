@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "hkutils",
+  "version": "${version}",
+  "name": "HKUtils",
+  "description": "H1ggsK's utility addon",
+  "authors": [
+    "H1ggsK"
+  ],
+  "contact": {
+    "repo": "https://github.com/H1ggsK/HKUtils"
+  },
+  "icon": "assets/hkutils/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "com.h1ggsk.hkutils.HKUtils"
+    ]
+  },
+  "mixins": [
+    "hkutils.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "228,1,234"
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": ["${mc_version}"],
+    "meteor-client": "*"
+  }
+}
