@@ -1,6 +1,7 @@
 package com.h1ggsk.hkutils.modules;
 
 import com.h1ggsk.hkutils.HKUtils;
+import meteordevelopment.meteorclient.events.packets.PacketEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.DoubleSetting;
 import meteordevelopment.meteorclient.settings.Setting;
@@ -8,6 +9,7 @@ import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
 import net.minecraft.util.math.Vec3d;
 
 public class SpeedLimiter extends Module {
@@ -24,7 +26,7 @@ public class SpeedLimiter extends Module {
 
     // Tracks last tick’s position of whichever entity is moving us
     private Vec3d lastPos;
-    private Entity lastEntity;  // either player or the mount
+    private Entity lastEntity;
 
     public SpeedLimiter() {
         super(HKUtils.HKUtils, "speed-limiter", "Caps ALL movement (3D) at your chosen BPS.");
@@ -44,39 +46,51 @@ public class SpeedLimiter extends Module {
         lastPos    = null;
     }
 
-    @EventHandler(priority = Integer.MIN_VALUE) // run after all other modules/events
+    @EventHandler
+    private void onGameJoin(PacketEvent.Receive event) {
+        if (event.packet instanceof GameJoinS2CPacket) {
+            // Reset internal state
+            lastPos = null;
+            lastEntity = null;
+
+            // Reinitialize if the module is active
+            if (isActive() && mc.player != null) {
+                lastEntity = mc.player.hasVehicle() ? mc.player.getVehicle() : mc.player;
+                lastPos = lastEntity.getPos();
+            }
+        }
+    }
+
+
+    /** Movement cap runs last, as before. */
+    @EventHandler(priority = Integer.MIN_VALUE)
     private void onTick(TickEvent.Post event) {
         if (mc.player == null) return;
 
-        // Determine which entity moved us this tick
         Entity mover = mc.player.hasVehicle() ? mc.player.getVehicle() : mc.player;
         Vec3d curr = mover.getPos();
 
-        // Initialize on first tick after activation
         if (lastPos == null || mover != lastEntity) {
             lastEntity = mover;
             lastPos    = curr;
             return;
         }
 
-        // Compute delta in 3D
         Vec3d delta = curr.subtract(lastPos);
-        double distance = delta.length();
+        double distance   = delta.length();
         double currentBPS = distance * 20;
+        double cap        = maxBPS.get();
 
-        double cap = maxBPS.get();
         if (currentBPS > cap) {
-            double factor = cap / currentBPS;
-            Vec3d scaledDelta = delta.multiply(factor);
-
-            Vec3d newPos = lastPos.add(scaledDelta);
+            double factor       = cap / currentBPS;
+            Vec3d scaledDelta   = delta.multiply(factor);
+            Vec3d newPos        = lastPos.add(scaledDelta);
             mover.setPosition(newPos.x, newPos.y, newPos.z);
 
             Vec3d vel = mover.getVelocity();
             mover.setVelocity(vel.x * factor, vel.y * factor, vel.z * factor);
         }
 
-        // Store for next tick
         lastPos = mover.getPos();
     }
 }
