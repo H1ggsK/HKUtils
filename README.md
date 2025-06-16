@@ -5,7 +5,10 @@ H1ggsK's utility addon for Meteor
 ## Modules
 - Weather Changer: Spoofs the client-side weather, allows you to fly with a Riptide trident even in clear weather
 - MaceDMG: Direct port of `MaceDMG` from Wurst, deals maximum possible damage with mace upon hit
-- Soeed Limiter: Limits your 3D BPS speed, designed to avoid the auto-ban when going above 35BPS on Constantiam
+- AutoShear+: `Auto Shearer` but with support for picking sheep colors
+
+## Commands
+- `.ping`: Pings h1ggsk on Discord (please don't spam it!)
 <hr>
 
 # Support

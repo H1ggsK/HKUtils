@@ -1,11 +1,13 @@
 package com.h1ggsk.hkutils;
 
+import com.h1ggsk.hkutils.commands.H1ggsKPing;
+import com.h1ggsk.hkutils.modules.AutoShearPlus;
 import com.h1ggsk.hkutils.modules.MaceDMG;
-import com.h1ggsk.hkutils.modules.SpeedLimiter;
 import com.h1ggsk.hkutils.modules.WeatherChanger;
 import com.mojang.logging.LogUtils;
 import meteordevelopment.meteorclient.addons.GithubRepo;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
+import meteordevelopment.meteorclient.commands.Commands;
 import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import org.slf4j.Logger;
@@ -18,9 +20,12 @@ public class HKUtils extends MeteorAddon {
     public void onInitialize() {
         LOG.info("Initializing HKUtils Addon");
 
+        // Commands
+        Commands.add(new H1ggsKPing());
+
         // Modules
+        Modules.get().add(new AutoShearPlus());
         Modules.get().add(new MaceDMG());
-        Modules.get().add(new SpeedLimiter());
         Modules.get().add(new WeatherChanger());
     }
 
