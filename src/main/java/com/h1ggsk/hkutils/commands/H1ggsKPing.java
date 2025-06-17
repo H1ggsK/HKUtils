@@ -5,11 +5,9 @@ import meteordevelopment.meteorclient.commands.Command;
 import net.minecraft.command.CommandSource;
 import java.net.URL;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-
-import net.minidev.json.JSONObject;
-
 
 public class H1ggsKPing extends Command {
 
@@ -21,24 +19,24 @@ public class H1ggsKPing extends Command {
     public void build(LiteralArgumentBuilder<CommandSource> builder) {
         builder.executes(context -> {
             try {
-                URL url = new URL("https://discord.com/api/webhooks/1383967962758905866/BOf6N4Ya3RfIlhZeNOJunTCFs4FLK4TwpoVz0DGvqNuUpv_q7N-n9J1flAklxZSv_11p");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setDoOutput(true);
-
-                JSONObject payload = new JSONObject();
                 assert mc.player != null;
-                String payloadContent = "<@1276279640465477703>, you have been pinged by " + mc.player.getName().getString() + "!";
-                payload.put("content", payloadContent);
+                String playerName = mc.player.getName().getString();
 
-                try (OutputStream os = connection.getOutputStream()) {
-                    byte[] input = payload.toString().getBytes(StandardCharsets.UTF_8);
-                    os.write(input, 0, input.length);
+                // URL encode the content
+                String message = URLEncoder.encode("<@1276279640465477703>, you have been pinged by " + playerName + "!", StandardCharsets.UTF_8);
+
+                // Create the URL with GET parameters
+                URL url = new URL("https://ping.h1ggsk.workers.dev/?content=" + message);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    info("h1ggsk has been pinged successfully!");
+                } else {
+                    error("Failed to send ping. Server returned HTTP code: " + responseCode);
                 }
-
-                connection.getResponseCode(); // Trigger the request
-                info("h1ggsk has been pinged!");
             } catch (Exception e) {
                 error("Failed to send ping: " + e.getMessage());
             }
