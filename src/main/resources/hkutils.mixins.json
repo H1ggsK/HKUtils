@@ -3,6 +3,7 @@
   "package": "com.h1ggsk.hkutils.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "HandledScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

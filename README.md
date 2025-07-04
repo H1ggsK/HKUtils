@@ -6,9 +6,14 @@ H1ggsK's utility addon for Meteor
 - Weather Changer: Spoofs the client-side weather, allows you to fly with a Riptide trident even in clear weather
 - MaceDMG: Direct port of `MaceDMG` from Wurst, deals maximum possible damage with mace upon hit
 - AutoShear+: `Auto Shearer` but with support for picking sheep colors
+- FPS Limiter: FPS Limiter for the client
+- ForwardChat: Forward your chat messages to a Discord Webhook of your choice
+- AutoTotemLegit: `AutoTotem`, but it only moves into your offhand when you open your inventory (shamelessly skidded from Krypton lol)
 
 ## Commands
 - `.ping`: Pings h1ggsk on Discord (please don't spam it!)
+- `.lifeadvice`: Gives you a random piece of advice, you should follow it fr
+- `.troll1`: IDK find out what happens
 <hr>
 
 # Support

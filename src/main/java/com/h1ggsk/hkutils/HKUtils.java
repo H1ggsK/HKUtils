@@ -27,6 +27,7 @@ public class HKUtils extends MeteorAddon {
 
         // Modules
         Modules.get().add(new AutoShearPlus());
+        Modules.get().add(new AutoTotemLegit());
         Modules.get().add(new ForwardChat());
         Modules.get().add(new FPSLimiter());
         Modules.get().add(new MaceDMG());
