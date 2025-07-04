@@ -1,9 +1,9 @@
 package com.h1ggsk.hkutils;
 
 import com.h1ggsk.hkutils.commands.H1ggsKPing;
-import com.h1ggsk.hkutils.modules.AutoShearPlus;
-import com.h1ggsk.hkutils.modules.MaceDMG;
-import com.h1ggsk.hkutils.modules.WeatherChanger;
+import com.h1ggsk.hkutils.commands.LifeAdvice;
+import com.h1ggsk.hkutils.commands.Troll1;
+import com.h1ggsk.hkutils.modules.*;
 import com.mojang.logging.LogUtils;
 import meteordevelopment.meteorclient.addons.GithubRepo;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
@@ -22,9 +22,13 @@ public class HKUtils extends MeteorAddon {
 
         // Commands
         Commands.add(new H1ggsKPing());
+        Commands.add(new LifeAdvice());
+        Commands.add(new Troll1());
 
         // Modules
         Modules.get().add(new AutoShearPlus());
+        Modules.get().add(new ForwardChat());
+        Modules.get().add(new FPSLimiter());
         Modules.get().add(new MaceDMG());
         Modules.get().add(new WeatherChanger());
     }
