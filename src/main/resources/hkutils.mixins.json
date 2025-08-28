@@ -3,7 +3,9 @@
   "package": "com.h1ggsk.hkutils.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "HandledScreenMixin"
+    "ClientPlayerEntityMixin",
+    "HandledScreenMixin",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
