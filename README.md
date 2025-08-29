@@ -9,6 +9,7 @@ H1ggsK's utility addon for Meteor
 - FPS Limiter: FPS Limiter for the client
 - ForwardChat: Forward your chat messages to a Discord Webhook of your choice
 - AutoTotemLegit: `AutoTotem`, but it only moves into your offhand when you open your inventory (DOES NOT WORK ON DONUT)
+- KillAuraLegit: Killaura from Wurst (don't judge, it's really good lol)
 
 ## Commands
 - `.iamanannoyingpieceofshit`: Pings h1ggsk on Discord (please don't spam it!)
