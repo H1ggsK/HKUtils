@@ -13,6 +13,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Tameable;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -161,9 +162,23 @@ public final class KillauraLegit extends Module {
 
             if (canAttack() && (RotationUtils.isAlreadyFacing(needed) || RotationUtils.isFacingBox(box, range.get()))) {
                 mc.interactionManager.attackEntity(mc.player, target);
+
+                boolean hadShield = mc.player.getOffHandStack().getItem() instanceof ShieldItem;
+                boolean wasBlocking = mc.player.isBlocking();
+
+                if (wasBlocking) {
+                    mc.player.clearActiveItem();
+                }
+
                 mc.player.swingHand(Hand.MAIN_HAND);
+
+                if (hadShield && wasBlocking) {
+                    mc.player.setCurrentHand(Hand.OFF_HAND);
+                }
+
                 lastAttackTime = System.currentTimeMillis() + getRandomDelay();
             }
+
         }
     }
 

@@ -1,5 +1,6 @@
 package com.h1ggsk.hkutils;
 
+import com.h1ggsk.hkutils.commands.ClickSlot;
 import com.h1ggsk.hkutils.commands.H1ggsKPing;
 import com.h1ggsk.hkutils.commands.LifeAdvice;
 import com.h1ggsk.hkutils.commands.Troll1;
@@ -24,11 +25,13 @@ public class HKUtils extends MeteorAddon {
         rotationFaker = new RotationFaker();
 
         // Commands
+        Commands.add(new ClickSlot());
         Commands.add(new H1ggsKPing());
         Commands.add(new LifeAdvice());
         Commands.add(new Troll1());
 
         // Modules
+        Modules.get().add(new AutoCraft());
         Modules.get().add(new AutoShearPlus());
         Modules.get().add(new AutoTotemLegit());
         Modules.get().add(new ForwardChat());
@@ -36,7 +39,12 @@ public class HKUtils extends MeteorAddon {
         Modules.get().add(new KillauraLegit());
         Modules.get().add(new MaceDMG());
         Modules.get().add(new WeatherChanger());
-        Modules.get().add(new ModuleThatDoes());
+
+        boolean aModuleThat = Boolean.getBoolean("hkutils.a_module_that");
+        if (aModuleThat) {
+            Modules.get().add(new ModuleThatDoes());
+        }
+
     }
 
     @Override
