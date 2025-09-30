@@ -9,6 +9,7 @@ H1ggsK's utility addon for Meteor
 - FPS Limiter: FPS Limiter for the client
 - ForwardChat: Forward your chat messages to a Discord Webhook of your choice
 - AutoTotemLegit: `AutoTotem`, but it only moves into your offhand when you open your inventory (DOES NOT WORK ON DONUT)
+- KillAuraLegit: Killaura from Wurst (don't judge, it's really good lol)
 
 ## Commands
 - `.iamanannoyingpieceofshit`: Pings h1ggsk on Discord (please don't spam it!)
@@ -17,7 +18,7 @@ H1ggsK's utility addon for Meteor
 <hr>
 
 # Support
-- Requires Minecraft 1.21.4 and [Meteor Client](https://meteorclient.com) to function. Use [ViaFabricPlus](https://modrinth.com/mod/viafabricplus) to connect to older versions.
+- Requires Minecraft 1.21.8 and [Meteor Client](https://meteorclient.com) to function. Use [ViaFabricPlus](https://modrinth.com/mod/viafabricplus) to connect to older versions.
 - DM me on Discord `@h1ggsk` or join [Bugs and Exploits Central](https://discord.com/invite/zcfMqDgFnF) if you need help with any part of the mod.
 <hr>
 
